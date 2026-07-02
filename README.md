@@ -1,4 +1,7 @@
 
+TO RUN APPLICATION
+1. composer install
+
 ## STEPS
 
 # Start
