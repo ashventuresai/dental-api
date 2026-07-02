@@ -2,7 +2,7 @@
 
 set -e
 
-php artisan migrate:fresh --seed --force
+php artisan migrate --force
 
 php artisan optimize:clear
 
