@@ -20,6 +20,12 @@ class Services extends Model
         'service_category',
         'service_price',
         'service_description',
-        'service_active'
+        'service_active',
+        'appointment_uuid',
     ];
+
+     public function appointment()
+    {
+        return $this->belongsTo(Appointment::class, 'appointment_uuid', 'appointment_uuid');
+    }
 }

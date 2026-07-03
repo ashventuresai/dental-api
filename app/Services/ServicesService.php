@@ -39,7 +39,8 @@ class ServicesService
             'service_category'=>$dto->service_category,
             'service_price'=>$dto->service_price,
             'service_description'=>$dto->service_description,
-            'service_active'=>$dto->service_active
+            'service_active'=>$dto->service_active,
+            'appointment_uuid'=>$dto->appointment_uuid
         ]);
     }
 

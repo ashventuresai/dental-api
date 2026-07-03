@@ -20,6 +20,7 @@ return new class extends Migration
             $table->integer('service_price')->default(0);
             $table->text('service_description')->nullable();
             $table->string('service_active')->nullable();
+            $table->string('appointment_uuid')->nullable();
             $table->timestamps();
         });
     }

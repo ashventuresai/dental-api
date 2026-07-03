@@ -56,6 +56,11 @@ class Product extends Model
         return $this->belongsTo(ProductUnit::class, 'product_unit_uuid', 'product_unit_uuid');
     }
 
+    public function appointment()
+    {
+        return $this->belongsTo(Appointment::class, 'appointment_uuid', 'appointment_uuid');
+    }
+
     public function stockMovements()
     {
         return $this->hasMany(StockMovement::class, 'product_uuid', 'product_uuid');

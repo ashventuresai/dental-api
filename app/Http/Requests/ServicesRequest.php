@@ -28,6 +28,7 @@ class ServicesRequest extends FormRequest
             'service_price'             => ['required','integer','min:100'],
             'service_description'       => ['nullable','string','max:255'],
             'service_active'            => ['required','string','max:10'],
+            'appointment_uuid'          => ['nullable', 'uuid', 'exists:tblappointments,appointment_uuid'],
         ];
 
     }

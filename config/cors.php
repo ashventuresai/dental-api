@@ -20,7 +20,7 @@ return [
     'allowed_methods' => ['*'],
 
     // 'allowed_origins' => ['*'],
-    'allowed_origins' => ['http://localhost:3000', 'https://dental-web-test.vercel.app'],
+    'allowed_origins' => ['https://dental-web-test.vercel.app', 'http://localhost:3000'],
     // 'allowed_origins' => env('ALLOWED_ORIGINS'),
 
     'allowed_origins_patterns' => [],

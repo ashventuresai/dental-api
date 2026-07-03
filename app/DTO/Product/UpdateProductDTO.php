@@ -21,6 +21,7 @@ class UpdateProductDTO
         public readonly int $current_stock,
         public readonly ?string $description,
         public readonly bool $is_active = true,
+        public readonly ?string $appointment_uuid
     ) {}
 
     public static function fromUpdateRequest(array $data): self
@@ -41,6 +42,7 @@ class UpdateProductDTO
                 : 0,
             description: $data['description'] ?? null,
             is_active: $data['is_active'] ?? true,
+            appointment_uuid: $data['appointment_uuid'] ?? null
         );
     }
 
@@ -65,6 +67,7 @@ class UpdateProductDTO
             'current_stock' => $this->current_stock,
             'description' => $this->description,
             'is_active' => $this->is_active,
+            'appointment_uuid' => $this->appointment_uuid,
         ];
     }
 

@@ -29,6 +29,7 @@ return new class extends Migration
             $table->timestamps();
             $table->softDeletes();
 
+            $table->string('appointment_uuid')->references('appointment_uuid')->on('tblappointments')->cascadeOnDelete();
             $table->string('product_category_uuid')->references('product_category_uuid')->on('tblproduct_categories')->cascadeOnDelete();
             $table->string('product_unit_uuid')->references('product_unit_uuid')->on('tblproduct_units')->cascadeOnDelete();
 

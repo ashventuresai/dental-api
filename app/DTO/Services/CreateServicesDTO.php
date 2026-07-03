@@ -12,7 +12,8 @@ class CreateServicesDTO
         public readonly string $service_category,
         public readonly int $service_price,
         public readonly ?string $service_description,
-        public readonly string $service_active
+        public readonly string $service_active,
+        public readonly ?string $appointment_uuid
     ){}
 
     public static function fromCreateRequest(ServicesRequest $request, string $serviceRunningNo)
@@ -23,7 +24,8 @@ class CreateServicesDTO
             service_category: $request->service_category,
             service_price: $request->service_price,
             service_description: $request->service_description,
-            service_active: $request->service_active
+            service_active: $request->service_active,
+            appointment_uuid: $request->appointment_uuid
         );
     }
 
