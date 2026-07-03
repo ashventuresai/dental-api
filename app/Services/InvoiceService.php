@@ -28,7 +28,7 @@ class InvoiceService
 
     public function create(CreateInvoiceDTO $dto)
     {
-        return DB::transaction(function () use ($dto) {
+        if ($dto->treatment_uuid) {
             $updateTreatmentStatus = Treatment::where('treatment_uuid', $dto->treatment_uuid)->firstOrFail();
             $updateTreatmentStatus->update([
                 'status' => 'Completed',
@@ -38,6 +38,10 @@ class InvoiceService
             $updateAppointmentStatus->update([
                 'status' => 'Pending Payment',
             ]);
+
+        }
+
+        return DB::transaction(function () use ($dto) {
 
             $appointment = Appointment::with('invoice')->where('appointment_uuid', $dto->appointment_uuid)->firstOrFail();
 
