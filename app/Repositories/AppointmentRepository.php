@@ -13,7 +13,7 @@ class AppointmentRepository implements AppointmentRepositoryInterface
 {
     public function getAll()
     {
-        return Appointment::with(['patient', 'staff', 'invoice'])->latest()->paginate(10);
+        return Appointment::with(['patient', 'staff', 'invoice.items'])->latest()->paginate(10);
     }
 
     public function findByUuid($appointment_uuid)
