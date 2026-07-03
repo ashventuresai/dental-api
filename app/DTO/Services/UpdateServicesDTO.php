@@ -10,8 +10,7 @@ class UpdateServicesDTO
         public readonly string $service_category,
         public readonly int $service_price,
         public readonly ?string $service_description,
-        public readonly string $service_active,
-        public readonly ?string $appointment_uuid,
+        public readonly string $service_active
     ){}
 
     public static function fromUpdateRequest(ServicesRequest $request)
@@ -21,8 +20,7 @@ class UpdateServicesDTO
             service_category: $request->service_category,
             service_price: $request->service_price,
             service_description: $request->service_description,
-            service_active: $request->service_active,
-            appointment_uuid: $request->appointment_uuid
+            service_active: $request->service_active
         );
     }
 }

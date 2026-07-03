@@ -27,7 +27,6 @@ class StoreProductRequest extends FormRequest
             'current_stock' => ['nullable', 'integer', 'min:0'],
             'description' => ['nullable', 'string'],
             'is_active' => ['nullable', 'boolean'],
-            'appointment_uuid' => ['nullable', 'uuid', 'exists:tblappointments,appointment_uuid'],
             'product_category_uuid' => ['required', 'uuid', 'exists:tblproduct_categories,product_category_uuid'],
             'product_unit_uuid' => ['required', 'uuid', 'exists:tblproduct_units,product_unit_uuid'],
         ];

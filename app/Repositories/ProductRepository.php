@@ -57,7 +57,7 @@ class ProductRepository implements ProductRepositoryInterface
 
     public function create(CreateProductDTO $dto): Product
     {
-        return Product::create($dto->toArray())->fresh(['category', 'unit', 'appointment']);
+        return Product::create($dto->toArray())->fresh(['category', 'unit']);
     }
 
     public function update(string $id, UpdateProductDTO $dto): Product
@@ -65,7 +65,7 @@ class ProductRepository implements ProductRepositoryInterface
         $product = $this->find($id);
         $product->update($dto->toArray());
 
-        return $product->fresh(['category', 'unit', 'appointment']);
+        return $product->fresh(['category', 'unit']);
     }
 
     public function delete(string $id): bool

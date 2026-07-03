@@ -52,24 +52,14 @@ class Appointment extends Model
         return $this->hasOne(Treatment::class, 'appointment_uuid', 'appointment_uuid');
     }
 
-    // public function treatments()
-    // {
-    //     return $this->hasMany(Treatment::class, 'appointment_uuid', 'appointment_uuid');
-    // }
+    public function treatments()
+    {
+        return $this->hasMany(Treatment::class, 'appointment_uuid', 'appointment_uuid');
+    }
 
     public function invoice()
     {
         return $this->hasOne(Invoice::class, 'appointment_uuid', 'appointment_uuid');
-    }
-
-    public function services()
-    {
-        return $this->hasMany(Service::class, 'appointment_uuid', 'appointment_uuid');
-    }
-
-    public function products()
-    {
-        return $this->hasMany(Product::class, 'appointment_uuid', 'appointment_uuid');
     }
 
 
