@@ -18,9 +18,9 @@ class PatientRequest extends FormRequest
             'firstname'                 => ['required', 'string', 'max:100'],
             'lastname'                  => ['required', 'string', 'max:100'],
             'middlename'                => ['nullable', 'string', 'max:100'],
-            'id_type'                   => ['required', 'in:1,2'], // 1 = IC, 2 = Passport
-            'ic_no'                     => ['nullable', 'string', 'max:50', 'required_if:id_type,1'],
-            'passport_no'               => ['nullable', 'string', 'max:50', 'required_if:id_type,2'],
+            'id_type'                   => ['required', 'string', 'max:50'], // e.g. IC, Passport
+            'ic_no'                     => ['required', 'string', 'max:50'],
+            'passport_no'               => ['nullable', 'string', 'max:50'],
             'addressline1'              => ['nullable', 'string', 'max:255'],
             'addressline2'              => ['nullable', 'string', 'max:255'],
             'postalcode'                => ['nullable', 'string', 'max:20'],
@@ -37,16 +37,6 @@ class PatientRequest extends FormRequest
             'emergency_name_2'          => ['nullable', 'string', 'max:100'],
             'emergency_phone_2'         => ['nullable', 'string', 'max:100'],
             'emergency_relationship_2'  => ['nullable', 'string', 'max:100']
-        ];
-    }
-
-    public function messages(): array
-    {
-        return [
-            'id_type.required' => 'ID type is required.',
-            'id_type.in' => 'ID type must be either IC (1) or Passport (2).',
-            'ic_no.required_if' => 'IC No is required when ID Type is IC.',
-            'passport_no.required_if' => 'Passport No is required when ID Type is Passport.',
         ];
     }
 }
