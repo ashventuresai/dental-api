@@ -53,6 +53,11 @@ class AppointmentController extends Controller
         return $this->service->getByUuid($appointment_uuid);
     }
 
+    public function historyForPatient($patient_uuid)
+    {
+        return $this->service->getByPatientUuid($patient_uuid);
+    }
+
     public function cancel($id)
     {
         return $this->service->cancel($id);

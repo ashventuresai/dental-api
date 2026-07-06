@@ -29,6 +29,11 @@ class AppointmentService
         return $this->appointmentRepo->findByUuid($appointment_uuid);
     }
 
+    public function getByPatientUuid($patient_uuid)
+    {
+        return $this->appointmentRepo->getByPatientUuid($patient_uuid);
+    }
+
     public function create(CreateAppointmentDTO $dto)
     {
         // BUSINESS RULE EXAMPLE:
