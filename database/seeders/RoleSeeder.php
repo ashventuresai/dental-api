@@ -2,10 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-
-use Illuminate\Support\Facades\DB;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class RoleSeeder extends Seeder
 {
@@ -14,25 +13,32 @@ class RoleSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('roles')->insert([
-            [
-                'name' => 'admin',
-                'guard_name' => 'web',
-                'created_at' => '2026-06-18 18:19:21',
-                'updated_at' => '2026-06-18 18:19:21',
-            ],
-            [
-                'name' => 'staff',
-                'guard_name' => 'web',
-                'created_at' => '2026-06-18 18:19:21',
-                'updated_at' => '2026-06-18 18:19:21',
-            ],
-            [
-                'name' => 'patient',
-                'guard_name' => 'web',
-                'created_at' => '2026-06-18 18:19:21',
-                'updated_at' => '2026-06-18 18:19:21',
-            ],
-        ]);
+        $permissionNames = ['Read', 'Create', 'Edit', 'Delete'];
+
+        $permissions = collect($permissionNames)->map(function (string $permissionName): Permission {
+            return Permission::firstOrCreate(
+                ['name' => $permissionName, 'guard_name' => 'web'],
+                ['name' => $permissionName, 'guard_name' => 'web']
+            );
+        });
+
+        $rolePermissions = [
+            'super admin' => $permissions->all(),
+            'admin' => $permissions->all(),
+            'doctor' => $permissions->all(),
+            'staff' => $permissions->filter(function (Permission $permission): bool {
+                return in_array($permission->name, ['Read', 'Create', 'Edit'], true);
+            })->values()->all(),
+            'patient' => [],
+        ];
+
+        foreach ($rolePermissions as $roleName => $permissionsForRole) {
+            $role = Role::firstOrCreate(
+                ['name' => $roleName, 'guard_name' => 'web'],
+                ['name' => $roleName, 'guard_name' => 'web']
+            );
+
+            $role->syncPermissions($permissionsForRole);
+        }
     }
 }

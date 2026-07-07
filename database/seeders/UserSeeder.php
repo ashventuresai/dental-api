@@ -2,46 +2,76 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\User;
 use Illuminate\Database\Seeder;
-
-use Illuminate\Support\Facades\DB;
 
 class UserSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
-    public function run(): void
+    public function run(): array
     {
-        DB::table('users')->insert([
+        $users = [
             [
-                'name' => 'Asyraf',
-                'email' => 'asyraf@gmail.com',
-                'email_verified_at' => null,
-                'password' => '$2y$12$i9emKnDak89sPlBzSQqW3O5CVkKf.pq/S9Nw02Q5yDBcc97qMc6Tq', // Asyraf123
-                'remember_token' => null,
-                'created_at' => '2026-06-18 18:19:21',
-                'updated_at' => '2026-06-18 18:19:21',
+                'name' => 'Super Admin',
+                'email' => 'superadmin@gmail.com',
+                'password' => 'SuperAdmin123',
+                'role' => 'super admin',
             ],
             [
                 'name' => 'Admin',
                 'email' => 'admin@gmail.com',
-                'email_verified_at' => null,
-                'password' => '$2y$12$1JhfDE35VYc1a6M3LPnDm.Jl2G701IfrqS3jzyz7S.KqEBFnGG9mC', // Admin123
-                'remember_token' => null,
-                'created_at' => '2026-06-18 18:43:20',
-                'updated_at' => '2026-06-18 18:43:20',
+                'password' => 'Admin123', //
+                'role' => 'admin',
+            ],
+            [
+                'name' => 'Asyraf',
+                'email' => 'asyraf@gmail.com',
+                'password' => 'Asyraf123', //
+                'role' => 'doctor',
+            ],
+            [
+                'name' => 'Doctor',
+                'email' => 'doctor@gmail.com',
+                'password' => 'Doctor123', //
+                'role' => 'doctor',
             ],
             [
                 'name' => 'Staff',
                 'email' => 'staff@gmail.com',
-                'email_verified_at' => null,
-                'password' => '$2y$12$f8zfFq/93q3iYUF1N2jAfusfLBBG1DSZ2ukYAbmixKqUnfbfScUa.', // Staff123
-                'remember_token' => null,
-                'created_at' => '2026-06-18 18:49:52',
-                'updated_at' => '2026-06-18 18:49:52',
+                'password' => 'Staff123', //
+                'role' => 'staff',
             ],
-        ]);
+            [
+                'name' => 'Patient',
+                'email' => 'patient@gmail.com',
+                'password' => 'Patient123', //
+                'role' => 'patient',
+            ],
+        ];
+
+        $createdUsers = [];
+
+        foreach ($users as $userData) {
+            $user = User::firstOrCreate(
+                ['email' => $userData['email']],
+                [
+                    'name' => $userData['name'],
+                    'email' => $userData['email'],
+                    'password' => bcrypt($userData['password']),
+                ]
+            );
+
+            $user->assignRole($userData['role']);
+
+            if (!isset($createdUsers[$userData['role']])) {
+                $createdUsers[$userData['role']] = [];
+            }
+
+            $createdUsers[$userData['role']][] = $user;
+        }
+
+        return $createdUsers;
     }
 }
