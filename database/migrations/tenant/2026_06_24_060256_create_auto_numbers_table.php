@@ -11,12 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tblproduct_units', function (Blueprint $table) {
+        Schema::create('tblautonumbers', function (Blueprint $table) {
             $table->id();
-            $table->uuid('product_unit_uuid')->nullable();
-            $table->string('name')->unique();
-            $table->text('description')->nullable();
-            $table->boolean('is_active')->default(true);
+            $table->string('key'); // e.g. STAFF, INVOICE
+            $table->string('prefix')->nullable(); // e.g. ST, INV
+            $table->bigInteger('current_value')->default(0);
+            $table->integer('pad_length')->default(5);
+            $table->integer('increment')->default(1);
             $table->timestamps();
         });
     }
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tblproduct_units');
+        Schema::dropIfExists('auto_numbers');
     }
 };

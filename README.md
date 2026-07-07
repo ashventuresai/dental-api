@@ -198,6 +198,11 @@ Role::create(['name' => 'patient']);
 9. php artisan make:resource PaymentResource
 
 
+## 015 - Multi Tenant
+1. composer require stancl/tenancy
+2. php artisan tenancy:install
+4. php artisan make:provider EventServiceProvider    
+3. php artisan make:listener TenantCreatedListener (to run tenant migration and seeder) 
 
 ## API Flow
 Controller → Service → Repository → DB

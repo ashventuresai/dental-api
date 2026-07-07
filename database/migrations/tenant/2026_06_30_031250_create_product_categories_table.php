@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('tblproduct_categories', function (Blueprint $table) {
             $table->id();
             $table->uuid('product_category_uuid')->nullable();
-            $table->string('name')->unique();
+            $table->string('name');
             $table->text('description')->nullable();
             $table->boolean('is_active')->default(true);
             $table->timestamps();

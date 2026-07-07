@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('tblproducts', function (Blueprint $table) {
             $table->id();
             $table->uuid('product_uuid')->nullable();
-            $table->string('product_code')->unique();
+            $table->string('product_code');
             $table->string('barcode')->nullable();
             $table->string('name');
             $table->string('generic_name')->nullable();
