@@ -19,19 +19,20 @@ class CreateTenantsTable extends Migration
             $table->string('id')->primary();
 
             // Clinic Information
-            // $table->string('name');
-            // $table->string('code')->unique();
+            $table->string('clinic_name')->default('');
+            $table->string('clinic_code')->nullable()->default('');
 
             // // Contact Information
-            // $table->string('email')->nullable();
-            // $table->string('phone')->nullable();
+            $table->string('clinic_email')->nullable()->default('');
+            $table->string('clinic_phone')->nullable()->default('');
 
             // // Address
-            // $table->text('address')->nullable();
-            // $table->string('city')->nullable();
-            // $table->string('state')->nullable();
-            // $table->string('postcode')->nullable();
-            // $table->string('country')->default('Malaysia');
+            $table->text('clinic_address1')->nullable()->default('');
+            $table->text('clinic_address2')->nullable()->default('');
+            $table->string('clinic_city')->nullable()->default('');
+            $table->string('clinic_state')->nullable()->default('');
+            $table->string('clinic_postcode')->nullable()->default('');
+            $table->string('clinic_country')->default('Malaysia');
 
             // Subscription
             // $table->string('plan')->default('trial');
@@ -39,7 +40,7 @@ class CreateTenantsTable extends Migration
             // $table->timestamp('subscription_ends_at')->nullable();
 
             // Status
-            // $table->boolean('is_active')->default(true);
+            $table->boolean('is_active')->default(true);
 
             $table->timestamps();
             $table->json('data')->nullable();

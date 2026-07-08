@@ -201,8 +201,22 @@ Role::create(['name' => 'patient']);
 ## 015 - Multi Tenant
 1. composer require stancl/tenancy
 2. php artisan tenancy:install
-4. php artisan make:provider EventServiceProvider    
-3. php artisan make:listener TenantCreatedListener (to run tenant migration and seeder) 
+3. php artisan make:provider EventServiceProvider    
+4. php artisan make:listener TenantCreatedListener (to run tenant migration and seeder) 
+5. php artisan make:controller Api/TenantController 
+6. php artisan make:controller Api/Central/TenantController
+
+For Testing
+Setup Local Development
+Host file : C:\Windows\System32\drivers\etc\hosts
+
+Add below
+127.0.0.1 localhost
+127.0.0.1 clinic1.localhost
+127.0.0.1 clinic2.localhost
+127.0.0.1 testing.localhost
+
+5. php artisan make:controller Api/Central/TenantController
 
 ## API Flow
 Controller → Service → Repository → DB
