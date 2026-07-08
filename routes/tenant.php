@@ -1,10 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
 use Illuminate\Support\Facades\Route;
-use Stancl\Tenancy\Middleware\InitializeTenancyByDomain;
-use Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains;
 
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\PatientController;
@@ -20,136 +16,124 @@ use App\Http\Controllers\Api\StockController;
 use App\Http\Controllers\Api\InvoiceController;
 use App\Http\Controllers\Api\PaymentController;
 
+Route::middleware(['tenant'])->group(function () {
 
-Route::middleware([
-    'api',
-    InitializeTenancyByDomain::class,
-    PreventAccessFromCentralDomains::class,
-])
-->prefix('v1')
-->group(function () {
-    // Route::get('/', function () {
-    //     dd(\App\Models\User::all());
-    //     return 'This is your multi-tenant application. The id of the current tenant is ' . tenant('id');
-    // });
-
-
-
-    /*
-    |--------------------------------------------------------------------------
-    | Public Tenant API
-    |--------------------------------------------------------------------------
-    */
-    Route::post('/login',[AuthController::class,'login']);
-    Route::post('/public/consent-forms',[ConsentFormController::class,'storeConsent']);
-
-    /*
-    |--------------------------------------------------------------------------
-    | Protected Tenant API
-    |--------------------------------------------------------------------------
-    */
-    Route::middleware('auth:sanctum')->group(function(){
-        Route::get('/user',function($request){ return request()->user(); });
-        Route::get('/profile',[AuthController::class,'profile']);
-        Route::post('/logout',[AuthController::class,'logout']);
+    Route::prefix('v1')->group(function () {
 
         /*
         |--------------------------------------------------------------------------
-        | Patients
+        | Public Tenant API
         |--------------------------------------------------------------------------
         */
-        Route::apiResource('patients', PatientController::class)->parameters(['patients'=>'patient_uuid']);
+        Route::post('/login',[AuthController::class,'login']);
+        Route::post('/public/consent-forms',[ConsentFormController::class,'storeConsent']);
 
         /*
         |--------------------------------------------------------------------------
-        | Appointments
+        | Protected Tenant API
         |--------------------------------------------------------------------------
         */
-        Route::prefix('appointments')->group(function(){
-            Route::get('/',[AppointmentController::class,'index']);
-            Route::post('/',[AppointmentController::class,'store']);
-            Route::get('/{appointment_uuid}',[AppointmentController::class,'show']);
-            Route::put('/{uuid}',[AppointmentController::class,'update']);
-            Route::delete('/{uuid}',[AppointmentController::class,'cancel']);
-            Route::post('/{uuid}/check-in',[AppointmentController::class,'checkIn']);
-            Route::post('/{uuid}/start-treatment',[AppointmentController::class,'startTreatment']);
-            Route::post('/{uuid}/waiting-payment',[AppointmentController::class,'markWaitingPayment']);
-            Route::post('/{uuid}/complete',[AppointmentController::class,'complete']);
+        Route::middleware('auth:sanctum')->group(function(){
+            Route::get('/user',function($request){ return request()->user(); });
+            Route::get('/profile',[AuthController::class,'profile']);
+            Route::post('/logout',[AuthController::class,'logout']);
+
+            /*
+            |--------------------------------------------------------------------------
+            | Patients
+            |--------------------------------------------------------------------------
+            */
+            Route::apiResource('patients', PatientController::class)->parameters(['patients'=>'patient_uuid']);
+
+            /*
+            |--------------------------------------------------------------------------
+            | Appointments
+            |--------------------------------------------------------------------------
+            */
+            Route::prefix('appointments')->group(function(){
+                Route::get('/',[AppointmentController::class,'index']);
+                Route::post('/',[AppointmentController::class,'store']);
+                Route::get('/{appointment_uuid}',[AppointmentController::class,'show']);
+                Route::put('/{uuid}',[AppointmentController::class,'update']);
+                Route::delete('/{uuid}',[AppointmentController::class,'cancel']);
+                Route::post('/{uuid}/check-in',[AppointmentController::class,'checkIn']);
+                Route::post('/{uuid}/start-treatment',[AppointmentController::class,'startTreatment']);
+                Route::post('/{uuid}/waiting-payment',[AppointmentController::class,'markWaitingPayment']);
+                Route::post('/{uuid}/complete',[AppointmentController::class,'complete']);
+            });
+
+            /*
+            |--------------------------------------------------------------------------
+            | Treatments
+            |--------------------------------------------------------------------------
+            */
+            Route::apiResource('treatments', TreatmentController::class);
+
+            /*
+            |--------------------------------------------------------------------------
+            | Staff
+            |--------------------------------------------------------------------------
+            */
+            Route::apiResource('staff',StaffController::class);
+
+            /*
+            |--------------------------------------------------------------------------
+            | Services
+            |--------------------------------------------------------------------------
+            */
+            Route::apiResource('services',ServicesController::class);
+
+            /*
+            |--------------------------------------------------------------------------
+            | Products
+            |--------------------------------------------------------------------------
+            */
+            Route::prefix('products')->group(function(){
+
+                Route::get('/',[ProductController::class,'index']);
+                Route::post('/',[ProductController::class,'store']);
+                Route::get('/categories/options',[ProductCategoryController::class,'options']);
+                Route::get('/units/options',[ProductUnitController::class,'options']);
+                Route::get('/{id}',[ProductController::class,'show']);
+                Route::put('/{id}',[ProductController::class,'update']);
+                Route::delete('/{id}',[ProductController::class,'destroy']);
+            });
+
+            /*
+            |--------------------------------------------------------------------------
+            | Stock
+            |--------------------------------------------------------------------------
+            */
+            Route::prefix('stock')->group(function(){
+
+                Route::post('/in',[StockController::class,'stockIn']);
+                Route::post('/out',[StockController::class,'stockOut']);
+                Route::post('/adjustment',[StockController::class,'adjustment']);
+                Route::get('/history/{productId}',[StockController::class,'history']);
+            });
+
+            /*
+            |--------------------------------------------------------------------------
+            | Invoice
+            |--------------------------------------------------------------------------
+            */
+            Route::apiResource('invoices',InvoiceController::class)->only([
+                'index',
+                'store',
+                'show'
+            ]);
+
+            /*
+            |--------------------------------------------------------------------------
+            | Payments
+            |--------------------------------------------------------------------------
+            */
+            Route::apiResource('payments',PaymentController::class)->only([
+                'index',
+                'store',
+                'show'
+            ]);
+
         });
-
-        /*
-        |--------------------------------------------------------------------------
-        | Treatments
-        |--------------------------------------------------------------------------
-        */
-        Route::apiResource('treatments', TreatmentController::class);
-
-        /*
-        |--------------------------------------------------------------------------
-        | Staff
-        |--------------------------------------------------------------------------
-        */
-        Route::apiResource('staff',StaffController::class);
-
-        /*
-        |--------------------------------------------------------------------------
-        | Services
-        |--------------------------------------------------------------------------
-        */
-        Route::apiResource('services',ServicesController::class);
-
-        /*
-        |--------------------------------------------------------------------------
-        | Products
-        |--------------------------------------------------------------------------
-        */
-        Route::prefix('products')->group(function(){
-
-            Route::get('/',[ProductController::class,'index']);
-            Route::post('/',[ProductController::class,'store']);
-            Route::get('/categories/options',[ProductCategoryController::class,'options']);
-            Route::get('/units/options',[ProductUnitController::class,'options']);
-            Route::get('/{id}',[ProductController::class,'show']);
-            Route::put('/{id}',[ProductController::class,'update']);
-            Route::delete('/{id}',[ProductController::class,'destroy']);
-        });
-
-        /*
-        |--------------------------------------------------------------------------
-        | Stock
-        |--------------------------------------------------------------------------
-        */
-        Route::prefix('stock')->group(function(){
-
-            Route::post('/in',[StockController::class,'stockIn']);
-            Route::post('/out',[StockController::class,'stockOut']);
-            Route::post('/adjustment',[StockController::class,'adjustment']);
-            Route::get('/history/{productId}',[StockController::class,'history']);
-        });
-
-        /*
-        |--------------------------------------------------------------------------
-        | Invoice
-        |--------------------------------------------------------------------------
-        */
-        Route::apiResource('invoices',InvoiceController::class)->only([
-            'index',
-            'store',
-            'show'
-        ]);
-
-        /*
-        |--------------------------------------------------------------------------
-        | Payments
-        |--------------------------------------------------------------------------
-        */
-        Route::apiResource('payments',PaymentController::class)->only([
-            'index',
-            'store',
-            'show'
-        ]);
-
-
-
     });
 });

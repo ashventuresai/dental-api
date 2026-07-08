@@ -13,6 +13,15 @@ class Tenant extends BaseTenant implements TenantWithDatabase
 
     protected $fillable = [
         'id',
-        // 'clinic_name'
+        'clinic_name',
+        'clinic_code',
+        'clinic_email',
+        'clinic_phone',
+        'clinic_address1',
+        'clinic_address2',
+        'clinic_city',
+        'clinic_state',
+        'clinic_postcode',
+        'clinic_country'
     ];
 }

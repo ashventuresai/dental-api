@@ -27,8 +27,8 @@ class CreateTenantsTable extends Migration
             $table->string('clinic_phone')->nullable()->default('');
 
             // // Address
-            $table->text('clinic_address1')->nullable()->default('');
-            $table->text('clinic_address2')->nullable()->default('');
+            $table->text('clinic_address1')->nullable();
+            $table->text('clinic_address2')->nullable();
             $table->string('clinic_city')->nullable()->default('');
             $table->string('clinic_state')->nullable()->default('');
             $table->string('clinic_postcode')->nullable()->default('');

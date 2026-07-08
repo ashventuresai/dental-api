@@ -17,6 +17,7 @@ require __DIR__.'/central.php';
 */
 require __DIR__.'/tenant.php';
 
+
 // use App\Http\Controllers\Api\AuthController;
 // use App\Http\Controllers\Api\PatientController;
 // use App\Http\Controllers\Api\ConsentFormController;
@@ -32,10 +33,9 @@ require __DIR__.'/tenant.php';
 // use App\Http\Controllers\Api\PaymentController;
 
 
-// foreach (config('tenancy.central_domains') as $domain) {
-//     Route::domain($domain)->group(function () {
+// Route::middleware(['tenant'])->group(function () {
 
-//         Route::prefix('v1')->group(function () {
+//     Route::prefix('v1')->group(function () {
 
 //         Route::post('/register', [AuthController::class, 'register']);
 //         Route::post('/login', [AuthController::class, 'login']);
@@ -128,5 +128,6 @@ require __DIR__.'/tenant.php';
 //         });
 
 //     });
-//     });
-// }
+
+// });
+

@@ -18,12 +18,12 @@ class TenantController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'clinic_name'=>'required|string|max:255',
+            'clinic_name'=>'required|string',
             'clinic_code'=>'nullable|string|max:50',
             'clinic_email'=>'nullable|email',
             'clinic_phone'=>'nullable|string|max:20',
-            'clinic_address1'=>'nullable|string|max:255',
-            'clinic_address2'=>'nullable|string|max:255',
+            'clinic_address1'=>'nullable|string|',
+            'clinic_address2'=>'nullable|string',
             'clinic_city'=>'nullable|string|max:100',
             'clinic_state'=>'nullable|string|max:100',
             'clinic_postcode'=>'nullable|string|max:20',
@@ -39,9 +39,9 @@ class TenantController extends Controller
             | Create Tenant
             |--------------------------------------------------------------------------
             */
-            $tenantId = Str::slug($request->clinic_name);
+            // $tenantId = Str::slug($request->clinic_name);
             $tenant = TenantModel::create([
-                'id' => $tenantId,
+                'id' => $request->domain,
                 'clinic_name'=>$request->clinic_name,
                 'clinic_code'=>$request->clinic_code,
                 'clinic_email'=>$request->clinic_email,
@@ -60,17 +60,16 @@ class TenantController extends Controller
             |--------------------------------------------------------------------------
             */
             Domain::create([
-                'domain'=>$request->domain.'.yourapp.com',
-                'tenant_id'=>$tenant->id
+                'domain'        => $request->domain.'.localhost',
+                'tenant_id'     => $tenant->id
             ]);
 
             return response()->json([
                 'message'=>'Tenant created successfully',
                 'tenant'=>[
-                    'id'            => $tenant->id,
-                    'name'          => $tenant->clinic_name,
-                    // 'domain'        => $request->domain.'.yourapp.com'
-                    'domain'        => $request->domain.'.localhost'
+                    'tenant_id'     => $tenant->id,
+                    'clinic_name'   => $tenant->clinic_name,
+                    'domain'        => $tenant->id.'.localhost'
                 ]
             ],201);
         } catch(\Exception $e){
