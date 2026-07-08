@@ -20,19 +20,24 @@ class CreateTenantsTable extends Migration
 
             // Clinic Information
             $table->string('clinic_name')->default('');
+            $table->string('clinic_legal_name')->nullable()->default('');
+            $table->string('clinic_registration_no')->nullable()->default('');
             $table->string('clinic_code')->nullable()->default('');
 
             // // Contact Information
             $table->string('clinic_email')->nullable()->default('');
             $table->string('clinic_phone')->nullable()->default('');
+            $table->string('clinic_website')->nullable()->default('');
 
             // // Address
             $table->text('clinic_address1')->nullable();
             $table->text('clinic_address2')->nullable();
-            $table->string('clinic_city')->nullable()->default('');
-            $table->string('clinic_state')->nullable()->default('');
-            $table->string('clinic_postcode')->nullable()->default('');
-            $table->string('clinic_country')->default('Malaysia');
+            $table->text('clinic_address3')->nullable();
+
+            //
+            $table->text('clinic_receipt_footer')->nullable();
+            $table->text('clinic_invoice_footer')->nullable();
+
 
             // Subscription
             // $table->string('plan')->default('trial');
