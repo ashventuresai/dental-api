@@ -10,7 +10,7 @@ class EventServiceProvider extends ServiceProvider
 {
     protected $listen = [
         TenantCreated::class => [
-            TenantCreatedListener::class,
+            // TenantCreatedListener::class,
         ],
     ];
 }
