@@ -8,6 +8,7 @@ use App\DTO\Appointment\UpdateAppointmentDTO;
 interface AppointmentRepositoryInterface
 {
     public function getAll();
+    public function getByPatientUuid($patient_uuid);
     public function findByUuid($appointment_uuid);
     public function create(CreateAppointmentDTO $dto);
     public function update($id, UpdateAppointmentDTO $dto);

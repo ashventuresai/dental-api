@@ -62,6 +62,7 @@ require __DIR__.'/tenant.php';
 //             Route::prefix('appointments')->group(function () {
 //                 Route::get('/', [AppointmentController::class, 'index']);// Done
 //                 Route::post('/', [AppointmentController::class, 'store']); // Done
+//                 Route::get('/patient/{patient_uuid}', [AppointmentController::class, 'historyForPatient']);
 //                 Route::get('/{appointment_uuid}', [AppointmentController::class, 'show']); // Done
 //                 Route::put('/{uuid}', [AppointmentController::class, 'update']); // Done
 //                 Route::delete('/{uuid}', [AppointmentController::class, 'cancel']);

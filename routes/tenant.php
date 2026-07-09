@@ -52,6 +52,7 @@ Route::prefix('v1')->group(function () {
             Route::prefix('appointments')->group(function(){
                 Route::get('/',[AppointmentController::class,'index']);
                 Route::post('/',[AppointmentController::class,'store']);
+                Route::get('/patient/{patient_uuid}', [AppointmentController::class, 'historyForPatient']);
                 Route::get('/{appointment_uuid}',[AppointmentController::class,'show']);
                 Route::put('/{uuid}',[AppointmentController::class,'update']);
                 Route::delete('/{uuid}',[AppointmentController::class,'cancel']);
