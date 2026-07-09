@@ -21,9 +21,12 @@ return [
 
     // 'allowed_origins' => ['*'],
     'allowed_origins' => ['http://localhost:3000', 'https://dental-web-test.vercel.app'],
-    // 'allowed_origins' => env('ALLOWED_ORIGINS'),
+    // 'allowed_origins' => env('FRONTEND_URL'),
 
-    'allowed_origins_patterns' => [],
+    'allowed_origins_patterns' => [
+        '#^https://.*\.vercel\.app$#',
+        '#^http://.*\.localhost:3000$#',
+    ],
 
     'allowed_headers' => ['*'],
 

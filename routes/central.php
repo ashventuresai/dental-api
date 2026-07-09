@@ -11,18 +11,18 @@ Route::prefix('v1')->group(function () {
     | Public Central API
     |--------------------------------------------------------------------------
     */
-    Route::post('/register',[AuthController::class,'register']);
-    Route::post('/login',[AuthController::class,'login']);
+    // Route::post('/register',[AuthController::class,'register']);
+    // Route::post('/login',[AuthController::class,'login']);
 
     /*
     |--------------------------------------------------------------------------
     | Authenticated Central User
     |--------------------------------------------------------------------------
     */
-    Route::middleware('auth:sanctum')->group(function(){
-        Route::post('/logout',[AuthController::class,'logout']);
-        Route::get('/profile',[AuthController::class,'profile']);
-    });
+    // Route::middleware('auth:sanctum')->group(function(){
+    //     Route::post('/logout',[AuthController::class,'logout']);
+    //     Route::get('/profile',[AuthController::class,'profile']);
+    // });
 
     /*
     |--------------------------------------------------------------------------
@@ -30,6 +30,6 @@ Route::prefix('v1')->group(function () {
     |--------------------------------------------------------------------------
     */
     Route::post('/tenants',[TenantController::class,'store']);
-    Route::get('/tenants',[TenantController::class,'index']);
+    Route::get('/tenant',[TenantController::class,'show']);
 
 });

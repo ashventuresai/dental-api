@@ -16,9 +16,7 @@ use App\Http\Controllers\Api\StockController;
 use App\Http\Controllers\Api\InvoiceController;
 use App\Http\Controllers\Api\PaymentController;
 
-Route::middleware(['tenant'])->group(function () {
-
-    Route::prefix('v1')->group(function () {
+Route::prefix('v1')->group(function () {
 
         /*
         |--------------------------------------------------------------------------
@@ -34,7 +32,8 @@ Route::middleware(['tenant'])->group(function () {
         |--------------------------------------------------------------------------
         */
         Route::middleware('auth:sanctum')->group(function(){
-            Route::get('/user',function($request){ return request()->user(); });
+            // Route::get('/user',function($request){ return request()->user(); });
+            Route::get('/user',[AuthController::class,'user']);
             Route::get('/profile',[AuthController::class,'profile']);
             Route::post('/logout',[AuthController::class,'logout']);
 
@@ -135,5 +134,4 @@ Route::middleware(['tenant'])->group(function () {
             ]);
 
         });
-    });
 });

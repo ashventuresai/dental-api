@@ -8,6 +8,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
+use App\Models\Tenant;
+use Illuminate\Support\Facades\Auth;
+
 class AuthController extends Controller
 {
     public function register(Request $request)
@@ -47,14 +50,26 @@ class AuthController extends Controller
             'password' => 'required',
         ]);
 
-        $user = User::where('email', $request->email)->first();
-
-        if (!$user || !Hash::check($request->password, $user->password)) {
-
-            throw ValidationException::withMessages([
-                'email' => ['Invalid credentials.'],
-            ]);
+        // Authenticate tenant user
+        if(!Auth::attempt([
+            'email'=>$request->email,
+            'password'=>$request->password
+        ])){
+            return response()->json([
+                'message'=>'Invalid login'
+            ],401);
         }
+
+        $user = Auth::user();
+
+        // $user = User::where('email', $request->email)->first();
+
+        // if (!$user || !Hash::check($request->password, $user->password)) {
+
+        //     throw ValidationException::withMessages([
+        //         'email' => ['Invalid credentials.'],
+        //     ]);
+        // }
 
         $user_role = $user->getRoleNames()->first();
 
@@ -66,6 +81,11 @@ class AuthController extends Controller
             'role' => $user_role,
             'token' => $token,
         ]);
+    }
+
+    public function user(Request $request)
+    {
+        return request()->user();
     }
 
     public function profile(Request $request)
