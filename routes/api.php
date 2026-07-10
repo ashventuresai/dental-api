@@ -15,6 +15,8 @@ require __DIR__.'/central.php';
 | Tenant Routes
 |--------------------------------------------------------------------------
 */
+require __DIR__.'/tenant.php';
+
 // use App\Http\Controllers\Api\AuthController;
 // use App\Http\Controllers\Api\PatientController;
 // use App\Http\Controllers\Api\ConsentFormController;
