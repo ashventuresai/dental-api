@@ -52,10 +52,11 @@ Route::prefix('v1')->group(function () {
             Route::prefix('appointments')->group(function(){
                 Route::get('/',[AppointmentController::class,'index']);
                 Route::post('/',[AppointmentController::class,'store']);
-                Route::get('/patient/{patient_uuid}', [AppointmentController::class, 'historyForPatient']);
+                Route::get('/patient/{patient_uuid}', [AppointmentController::class, 'historyForPatient']); // Done
                 Route::get('/{appointment_uuid}',[AppointmentController::class,'show']);
                 Route::put('/{uuid}',[AppointmentController::class,'update']);
-                Route::delete('/{uuid}',[AppointmentController::class,'cancel']);
+                Route::delete('/{uuid}',[AppointmentController::class,'destroy']);
+                Route::post('/{uuid}/cancel',[AppointmentController::class,'cancel']);
                 Route::post('/{uuid}/check-in',[AppointmentController::class,'checkIn']);
                 Route::post('/{uuid}/start-treatment',[AppointmentController::class,'startTreatment']);
                 Route::post('/{uuid}/waiting-payment',[AppointmentController::class,'markWaitingPayment']);
