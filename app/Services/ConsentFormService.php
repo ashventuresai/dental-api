@@ -47,11 +47,29 @@ class ConsentFormService
         $signature = str_replace('data:image/png;base64,', '', $base64);
         $signature = str_replace(' ', '+', $signature);
 
-        $fileName = 'signatures/' . uniqid() . '.png';
+        $tenant = tenant();
 
-        Storage::disk('public')->put($fileName, base64_decode($signature));
+        if (!$tenant) {
+            throw new \Exception('Tenant not initialized.');
+        }
 
-        return $fileName;
+        // Folder: storage/app/public/tenants/{tenant-id}/signatures
+        $folder = "tenants/{$tenant->id}/signatures";
+
+        // Create folder if it doesn't exist
+        if (!Storage::disk('public')->exists($folder)) {
+            Storage::disk('public')->makeDirectory($folder);
+        }
+
+        $fileName = uniqid('signature_') . '.png';
+        $path = "{$folder}/{$fileName}";
+
+        Storage::disk('public')->put(
+            $path,
+            base64_decode($signature)
+        );
+
+        return $path;
     }
 
     /**

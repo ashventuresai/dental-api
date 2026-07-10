@@ -8,7 +8,7 @@ class UpdatePatientDTO
 {
     public function __construct(
         public readonly string $firstname,
-        public readonly string $lastname,
+        public readonly ?string $lastname,
         public readonly ?string $middlename,
         public readonly string $id_type,
         public readonly ?string $ic_no,
