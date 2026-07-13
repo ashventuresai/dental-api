@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('tblconsentforms', function (Blueprint $table) {
             $table->id();
+            $table->uuid('consent_uuid')->index();
             $table->string('consent_type')->default('Consent');
             $table->string('patient_name', 90)->nullable();
             $table->string('patient_ic_no', 90)->nullable();

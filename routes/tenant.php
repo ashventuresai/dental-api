@@ -46,6 +46,16 @@ Route::prefix('v1')->group(function () {
 
             /*
             |--------------------------------------------------------------------------
+            | Consent Forms
+            |--------------------------------------------------------------------------
+            */
+            Route::prefix('consent-forms')->group(function () {
+                Route::get('/patient/{patient_uuid}', [ConsentFormController::class, 'listByPatient']);
+                Route::get('/{consent_uuid}', [ConsentFormController::class, 'showConsent']);
+            });
+
+            /*
+            |--------------------------------------------------------------------------
             | Appointments
             |--------------------------------------------------------------------------
             */

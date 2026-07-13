@@ -18,6 +18,7 @@ class ConsentFormService
         $filePath = $this->storeSignature($dto->signature_base64);
 
         $store_consent = ConsentForm::create([
+            'consent_uuid' => $dto->consent_uuid,
             'patient_name' => $dto->patient_name,
             'patient_ic_no' => $dto->patient_ic_no,
             'patient_dob' => $dto->patient_dob,
@@ -87,9 +88,9 @@ class ConsentFormService
     /**
      * Find consent form by ID.
      */
-    public function find(int $id): ?ConsentForm
+    public function find(string $consent_uuid): ?ConsentForm
     {
-        return ConsentForm::find($id);
+        return ConsentForm::where('consent_uuid', $consent_uuid)->first();
     }
 
     /**

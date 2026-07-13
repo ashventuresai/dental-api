@@ -4,10 +4,12 @@ namespace App\DTO;
 
 use App\Http\Requests\ConsentFormRequest;
 use Carbon\CarbonInterface;
+use Illuminate\Support\Str;
 
 class ConsentFormDTO
 {
     public function __construct(
+        public string $consent_uuid,
         public ?string $patient_name,
         public ?string $patient_ic_no,
         public ?string $patient_dob,
@@ -34,6 +36,7 @@ class ConsentFormDTO
         $data = $request->input('form_data', []);
 
         return new self(
+            consent_uuid: (string) Str::uuid(),
             patient_name: $data['nama_pesakit'] ?? null,
             patient_ic_no: $data['no_ic'] ?? null,
             patient_dob: $data['tarikh_lahir'] ?? null,

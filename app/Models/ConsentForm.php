@@ -12,6 +12,7 @@ class ConsentForm extends Model
     protected $table = 'tblconsentforms'; // change if your table name differs
 
     protected $fillable = [
+        'consent_uuid',
         'patient_name',
         'patient_ic_no',
         'patient_dob',
