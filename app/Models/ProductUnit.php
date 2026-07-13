@@ -12,7 +12,8 @@ class ProductUnit extends Model
 
     protected $fillable = [
         'name',
-        'is_active'
+        'description',
+        'is_active',
     ];
 
     protected $casts = [
