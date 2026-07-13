@@ -55,7 +55,7 @@ class ServicesSeeder extends Seeder
         Services::create([
             'service_uuid'=>Str::uuid(),
             'service_code'=>'SVC_00005',
-            'service_name'=>'1 BATANG GIGI',
+            'service_name'=>'1 BATANG GIGI (COBALT CROMIUM)',
             'service_category'=>'COBALT CROMIUM DENTURE',
             'service_description'=>'',
             'service_price'=>35,

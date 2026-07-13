@@ -22,7 +22,8 @@ class ServicesService
                     ->orWhere('service_category','like',"%$search%");
             })
             ->orderBy('service_name')
-            ->paginate(15);
+            // ->paginate(15);
+            ->get();
     }
 
     public function findByUUID($uuid)
