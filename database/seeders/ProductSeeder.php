@@ -42,7 +42,7 @@ class ProductSeeder extends Seeder
                 'name' => 'Composite Resin A2',
                 'generic_name' => null,
                 'category' => 'Dental Material',
-                'unit' => 'Cartridge',
+                'unit' => 'Litre',
                 'purchase_price' => 80.00,
                 'selling_price' => 120.00,
                 'minimum_stock' => 10,
