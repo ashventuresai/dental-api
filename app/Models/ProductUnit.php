@@ -11,6 +11,7 @@ class ProductUnit extends Model
     protected $table = 'tblproduct_units';
 
     protected $fillable = [
+        'product_unit_uuid',
         'name',
         'description',
         'is_active',
