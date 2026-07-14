@@ -25,7 +25,7 @@ class ServicesRequest extends FormRequest
         return [
             'service_name'              => ['required','string','max:100'],
             'service_category'          => ['nullable','string','max:50'],
-            'service_price'             => ['required','integer','min:100'],
+            'service_price'             => ['required','integer','min:0'],
             'service_description'       => ['nullable','string','max:255'],
             'service_active'            => ['required','string','max:10'],
         ];
