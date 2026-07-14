@@ -24,7 +24,6 @@ class Product extends Model
         'product_category_uuid',
         'product_unit_uuid',
         'brand',
-        'type',
         'purchase_price',
         'selling_price',
         'minimum_stock',
@@ -34,7 +33,6 @@ class Product extends Model
     ];
 
     protected $casts = [
-        'type' => ProductType::class,
         'is_active' => 'boolean',
         'purchase_price' => 'decimal:2',
         'selling_price' => 'decimal:2',
@@ -70,16 +68,6 @@ class Product extends Model
     public function scopeActive($query)
     {
         return $query->where('is_active', true);
-    }
-
-    public function scopeMedicine($query)
-    {
-        return $query->where('type', ProductType::MEDICINE);
-    }
-
-    public function scopeConsumable($query)
-    {
-        return $query->where('type', ProductType::CONSUMABLE);
     }
 
     public function scopeLowStock($query)

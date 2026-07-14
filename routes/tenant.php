@@ -106,7 +106,7 @@ Route::prefix('v1')->group(function () {
                 Route::get('/categories/options',[ProductCategoryController::class,'options']);
                 Route::get('/units/options',[ProductUnitController::class,'options']);
                 Route::get('/{id}',[ProductController::class,'show']);
-                Route::put('/{id}',[ProductController::class,'update']);
+                Route::put('/{id}',[ProductController::class,'update']); // Done
                 Route::delete('/{id}',[ProductController::class,'destroy']);
             });
 

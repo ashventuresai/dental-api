@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests;
 
-use App\Enums\ProductType;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -21,7 +20,6 @@ class UpdateProductRequest extends FormRequest
             'name' => ['required', 'string', 'max:255'],
             'generic_name' => ['nullable', 'string', 'max:255'],
             'brand' => ['nullable', 'string', 'max:255'],
-            'type' => ['required', Rule::in(array_map(fn (ProductType $type) => $type->value, ProductType::cases()))],
             'purchase_price' => ['required', 'numeric', 'min:0'],
             'selling_price' => ['required', 'numeric', 'min:0'],
             'minimum_stock' => ['required', 'integer', 'min:0'],
