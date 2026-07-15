@@ -14,9 +14,11 @@ class PatientSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('tblpatients')->insert([
+        DB::table('tblpatients')->updateOrInsert(
             [
                 'patient_uuid' => '22e7eab0-90f2-4a94-ad66-7d9fc11cf968',
+            ],
+            [
                 'firstname' => 'Muhammad',
                 'lastname' => 'Rahmat',
                 'middlename' => 'Saiful',
@@ -41,9 +43,13 @@ class PatientSeeder extends Seeder
                 'emergency_relationship_2' => '',
                 'created_at' => null,
                 'updated_at' => null,
-            ],
+            ]);
+
+        DB::table('tblpatients')->updateOrInsert(
             [
                 'patient_uuid' => 'ef3e03e5-e0b6-4a6e-b99b-263333164dce',
+            ],
+            [
                 'firstname' => 'Hanif',
                 'lastname' => 'Ramly',
                 'middlename' => 'Binti',
@@ -68,9 +74,13 @@ class PatientSeeder extends Seeder
                 'emergency_relationship_2' => '',
                 'created_at' => '2025-09-29 17:29:15',
                 'updated_at' => '2025-09-29 17:29:15',
-            ],
+            ]);
+
+        DB::table('tblpatients')->updateOrInsert(
             [
                 'patient_uuid' => 'ef3e03e5-e0b6-4a6e-b99b-264567864dce',
+            ],
+            [
                 'firstname' => 'Hafiz',
                 'lastname' => 'Talib',
                 'middlename' => 'Bin',
@@ -95,9 +105,13 @@ class PatientSeeder extends Seeder
                 'emergency_relationship_2' => '',
                 'created_at' => '2025-10-01 17:29:15',
                 'updated_at' => null,
-            ],
+            ]);
+
+        DB::table('tblpatients')->updateOrInsert(
             [
                 'patient_uuid' => 'ef3e03e5-e0b6-4a6e-b99b-261234564dce',
+            ],
+            [
                 'firstname' => 'Ali',
                 'lastname' => 'Abu',
                 'middlename' => 'Bin',
@@ -122,9 +136,13 @@ class PatientSeeder extends Seeder
                 'emergency_relationship_2' => '',
                 'created_at' => '2025-09-29 17:29:15',
                 'updated_at' => null,
-            ],
+            ]);
+
+        DB::table('tblpatients')->updateOrInsert(
             [
                 'patient_uuid' => 'ef3e03e5-e0b6-4a6e-b99b-2640a3164dce',
+            ],
+            [
                 'firstname' => 'Muhammad',
                 'lastname' => 'Bin Ahmad',
                 'middlename' => 'Nur Asyraf',
@@ -149,9 +167,13 @@ class PatientSeeder extends Seeder
                 'emergency_relationship_2' => '',
                 'created_at' => null,
                 'updated_at' => null,
-            ],
+            ]);
+
+        DB::table('tblpatients')->updateOrInsert(
             [
                 'patient_uuid' => 'ef3e03e5-e0b6-4a6e-b99b-a3164dce',
+            ],
+            [
                 'firstname' => 'Muhammad',
                 'lastname' => 'Ali',
                 'middlename' => 'Nur',
@@ -176,7 +198,6 @@ class PatientSeeder extends Seeder
                 'emergency_relationship_2' => '',
                 'created_at' => '2026-06-23 00:25:20',
                 'updated_at' => '2026-06-23 00:25:20',
-            ],
-        ]);
+            ]);
     }
 }

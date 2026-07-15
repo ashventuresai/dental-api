@@ -10,7 +10,8 @@ class EventServiceProvider extends ServiceProvider
 {
     protected $listen = [
         TenantCreated::class => [
-            // TenantCreatedListener::class,
+            // Creates the per-tenant storage junction and runs tenant migrations/seeding
+            TenantCreatedListener::class,
         ],
     ];
 }

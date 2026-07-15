@@ -9,6 +9,7 @@ use Illuminate\Support\Str;
 use App\Models\Appointment;
 use App\Models\Patient;
 use App\Models\Staff;
+use App\Models\TreatmentAttachment;
 use App\Enums\TreatmentStatus;
 
 class Treatment extends Model
@@ -75,5 +76,14 @@ class Treatment extends Model
     public function staff()
     {
         return $this->belongsTo(Staff::class, 'staff_uuid', 'staff_uuid');
+    }
+
+    /**
+     * A treatment can have up to 20 file attachments (X-rays, photos, PDFs, etc.).
+     * Files are stored on the tenant-scoped public disk.
+     */
+    public function attachments()
+    {
+        return $this->hasMany(TreatmentAttachment::class, 'treatment_uuid', 'treatment_uuid');
     }
 }

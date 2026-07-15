@@ -16,6 +16,8 @@ use App\Repositories\Interfaces\InvoiceRepositoryInterface;
 use App\Repositories\InvoiceRepository;
 use App\Repositories\Interfaces\PaymentRepositoryInterface;
 use App\Repositories\PaymentRepository;
+use App\Repositories\Interfaces\TreatmentAttachmentRepositoryInterface;
+use App\Repositories\TreatmentAttachmentRepository;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
@@ -27,6 +29,8 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(ProductRepositoryInterface::class, ProductRepository::class);
         $this->app->bind(InvoiceRepositoryInterface::class, InvoiceRepository::class);
         $this->app->bind(PaymentRepositoryInterface::class, PaymentRepository::class);
+        // Bind attachment repository for treatment file upload feature
+        $this->app->bind(TreatmentAttachmentRepositoryInterface::class, TreatmentAttachmentRepository::class);
     }
 
     /**

@@ -69,11 +69,18 @@ class TenancyServiceProvider extends ServiceProvider
             Events\InitializingTenancy::class => [],
             Events\TenancyInitialized::class => [
                 Listeners\BootstrapTenancy::class,
+                // Patch the public disk URL to include the tenant ID so that
+                // Storage::disk('public')->url() returns the correct tenant-scoped URL.
+                // Must run AFTER BootstrapTenancy (which updates the disk root).
+                \App\Listeners\UpdateTenantStorageUrl::class,
             ],
 
             Events\EndingTenancy::class => [],
             Events\TenancyEnded::class => [
                 Listeners\RevertToCentralContext::class,
+                // Restore the public disk URL back to the central storage URL
+                // so subsequent central-context operations use the correct URL.
+                \App\Listeners\RevertTenantStorageUrl::class,
             ],
 
             Events\BootstrappingTenancy::class => [],

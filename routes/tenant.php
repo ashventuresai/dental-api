@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\StaffController;
 use App\Http\Controllers\Api\ServicesController;
 use App\Http\Controllers\Api\AppointmentController;
 use App\Http\Controllers\Api\TreatmentController;
+use App\Http\Controllers\Api\TreatmentAttachmentController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\ProductCategoryController;
 use App\Http\Controllers\Api\ProductUnitController;
@@ -79,6 +80,23 @@ Route::prefix('v1')->group(function () {
             |--------------------------------------------------------------------------
             */
             Route::apiResource('treatments', TreatmentController::class);
+
+            /*
+            |--------------------------------------------------------------------------
+            | Treatment Attachments
+            | Nested under treatments; each file stored on the tenant-scoped public
+            | disk at: storage/tenant_{id}/app/public/treatments/{treatment_uuid}/
+            |
+            | Allowed:  JPEG, PNG, GIF, WebP, PDF, DOC, DOCX (max 20 per treatment)
+            | Rejected: all video formats and other binary types
+            | Max size: 10 MB per file (compression done on the frontend)
+            |--------------------------------------------------------------------------
+            */
+            Route::prefix('treatments/{treatment_uuid}/attachments')->group(function () {
+                Route::get('/', [TreatmentAttachmentController::class, 'index']);                          // List all attachments
+                Route::post('/', [TreatmentAttachmentController::class, 'store']);                         // Upload one or more files
+                Route::delete('/{attachment_uuid}', [TreatmentAttachmentController::class, 'destroy']);    // Delete a single attachment
+            });
 
             /*
             |--------------------------------------------------------------------------
