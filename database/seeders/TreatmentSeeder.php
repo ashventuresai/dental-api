@@ -19,9 +19,9 @@ class TreatmentSeeder extends Seeder
         Treatment::create([
             'treatment_uuid' => (string) Str::uuid(),
 
-            'appointment_uuid' => 'app-uuid-001',
-            'patient_uuid' => 'pat-uuid-001',
-            'staff_uuid' => 'staff-uuid-001',
+            'appointment_uuid' => '30ac4011-6dce-4de2-a6a3-6ae1d691c922',
+            'patient_uuid' => '22e7eab0-90f2-4a94-ad66-7d9fc11cf968',
+            'staff_uuid' => '30ac40ac-6dce-4de2-a6a3-6ae1d691c922',
 
             'chief_complaint' => 'Toothache on lower right molar for 3 days',
             'history_of_complaint' => 'Pain started gradually, worsens at night',

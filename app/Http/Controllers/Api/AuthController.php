@@ -85,7 +85,15 @@ class AuthController extends Controller
 
     public function user(Request $request)
     {
-        return request()->user();
+        // return request()->user();
+
+        $user = request()->user();
+
+        $user->role = $user->getRoleNames()->first(); // or $user->roles->first()?->name
+
+        return response()->json([
+            'user' => $user,
+        ]);
     }
 
     public function profile(Request $request)
