@@ -25,7 +25,6 @@ Route::prefix('v1')->group(function () {
         |--------------------------------------------------------------------------
         */
         Route::post('/login',[AuthController::class,'login']);
-        Route::post('/public/consent-forms',[ConsentFormController::class,'storeConsent']);
 
         /*
         |--------------------------------------------------------------------------
@@ -162,6 +161,13 @@ Route::prefix('v1')->group(function () {
                 'store',
                 'show'
             ]);
+
+            /*
+            |--------------------------------------------------------------------------
+            | Consent Forms
+            |--------------------------------------------------------------------------
+            */
+            Route::post('/public/consent-forms',[ConsentFormController::class,'storeConsent']);
 
         });
 });
