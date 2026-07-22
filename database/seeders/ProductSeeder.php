@@ -17,7 +17,7 @@ class ProductSeeder extends Seeder
      */
     public function run(): void
     {
-         $products = [
+        $products = [
             [
                 'name' => 'Amoxicillin 500mg',
                 'generic_name' => 'Amoxicillin',
@@ -71,26 +71,29 @@ class ProductSeeder extends Seeder
         ];
 
         foreach ($products as $index => $p) {
-
+            $productCode = 'PRD-' . str_pad($index + 1, 4, '0', STR_PAD_LEFT);
+            
             $category = ProductCategory::where('name', $p['category'])->first();
             $unit = ProductUnit::where('name', $p['unit'])->first();
 
-            Product::create([
-                'product_uuid' => Str::uuid(),
-                'product_code' => 'PRD-' . str_pad($index + 1, 4, '0', STR_PAD_LEFT),
-                'barcode' => null,
-                'name' => $p['name'],
-                'generic_name' => $p['generic_name'],
-                'product_category_uuid' => $category->product_category_uuid,
-                'product_unit_uuid' => $unit->product_unit_uuid,
-                'brand' => 'Clinic Standard',
-                'purchase_price' => $p['purchase_price'],
-                'selling_price' => $p['selling_price'],
-                'minimum_stock' => $p['minimum_stock'],
-                'current_stock' => $p['current_stock'],
-                'description' => $p['name'] . ' for dental treatment',
-                'is_active' => true,
-            ]);
+            Product::updateOrCreate(
+                ['product_code' => $productCode],
+                [
+                    'product_uuid' => Str::uuid(),
+                    'barcode' => null,
+                    'name' => $p['name'],
+                    'generic_name' => $p['generic_name'],
+                    'product_category_uuid' => $category->product_category_uuid,
+                    'product_unit_uuid' => $unit->product_unit_uuid,
+                    'brand' => 'Clinic Standard',
+                    'purchase_price' => $p['purchase_price'],
+                    'selling_price' => $p['selling_price'],
+                    'minimum_stock' => $p['minimum_stock'],
+                    'current_stock' => $p['current_stock'],
+                    'description' => $p['name'] . ' for dental treatment',
+                    'is_active' => true,
+                ]
+            );
         }
     }
 }
