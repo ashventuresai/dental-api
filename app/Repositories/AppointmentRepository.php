@@ -37,6 +37,7 @@ class AppointmentRepository implements AppointmentRepositoryInterface
             'appointment_uuid' => Str::uuid(),
             'patient_uuid' => $dto->patient_uuid,
             'staff_uuid' => $dto->staff_uuid,
+            'consent_uuid' => $dto->consent_uuid,
             'patient_name' => $dto->patient_name,
             'patient_ic_no' => $dto->patient_ic_no,
             'appointment_datetime' => $dto->appointment_datetime,
@@ -55,6 +56,7 @@ class AppointmentRepository implements AppointmentRepositoryInterface
         $appt->update([
             'patient_uuid' => $dto->patient_uuid,
             'staff_uuid' => $dto->staff_uuid,
+            'consent_uuid' => $dto->consent_uuid,
             'patient_name' => $dto->patient_name,
             'patient_ic_no' => $dto->patient_ic_no,
             'appointment_datetime' => $dto->appointment_datetime,

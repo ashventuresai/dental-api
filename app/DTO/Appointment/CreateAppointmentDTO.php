@@ -7,9 +7,9 @@ use App\Http\Requests\AppointmentRequest;
 class CreateAppointmentDTO
 {
     public function __construct(
-        // public readonly ?int $id,
         public readonly string $patient_uuid,
         public readonly string $staff_uuid,
+        public readonly ?string $consent_uuid,
         public readonly string $patient_name,
         public readonly string $patient_ic_no,
         public readonly string $appointment_datetime,
@@ -23,9 +23,9 @@ class CreateAppointmentDTO
     public static function fromCreateRequest(AppointmentRequest $request): self
     {
         return new self(
-            // id: $request->id ?? null,
             patient_uuid: $request->patient_uuid,
             staff_uuid: $request->staff_uuid,
+            consent_uuid: $request->consent_uuid,
             patient_name: $request->patient_name,
             patient_ic_no: $request->patient_ic_no,
             appointment_datetime: $request->appointment_datetime,
@@ -43,6 +43,7 @@ class CreateAppointmentDTO
         return [
             'staff_uuid' => $this->staff_uuid,
             'patient_uuid' => $this->patient_uuid,
+            'consent_uuid' => $this->consent_uuid,
             'patient_name' => $this->patient_name,
             'patient_ic_no' => $this->patient_ic_no,
             'appointment_datetime' => $this->appointment_datetime,

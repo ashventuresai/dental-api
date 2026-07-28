@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
+use App\Models\Appointment;
+
 class ConsentForm extends Model
 {
     use HasFactory;
@@ -42,4 +44,10 @@ class ConsentForm extends Model
     protected $casts = [
         'signed_at' => 'datetime',
     ];
+
+
+    public function appointment()
+    {
+        return $this->belongsTo(Appointment::class, 'appointment_uuid', 'appointment_uuid');
+    }
 }

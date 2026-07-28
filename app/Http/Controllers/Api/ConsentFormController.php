@@ -58,6 +58,7 @@ class ConsentFormController extends Controller
                 'appointment_uuid' => Str::uuid(),
                 'patient_uuid' => $patient->patient_uuid,
                 'staff_uuid' => $form['staff_uuid'] ?? null,
+                'consent_uuid' => $consent->consent_uuid ?? null,
                 'patient_name' => $form['nama_pesakit'],
                 'patient_ic_no' => $form['no_ic'],
                 'appointment_datetime' => now()->format('Y-m-d H:i:s'),

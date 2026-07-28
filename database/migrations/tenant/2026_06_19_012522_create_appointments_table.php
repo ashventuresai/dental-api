@@ -22,8 +22,9 @@ return new class extends Migration
             $table->string('reason', 255)->nullable();
             $table->string('patient_medical_problem', 255)->nullable();
             $table->string('patient_disease_history', 255)->nullable();
-            $table->string('staff_uuid', 255)->nullable();
-            $table->string('patient_uuid', 255)->nullable();
+            $table->uuid('staff_uuid')->nullable();
+            $table->uuid('patient_uuid')->nullable();
+            $table->uuid('consent_uuid')->nullable();
 
             $table->timestamp('created_at');
             $table->timestamp('updated_at');

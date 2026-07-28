@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
+use App\Models\ConsentForm;
 use App\Models\Patient;
 use App\Models\Staff;
 use App\Models\Treatment;
@@ -27,6 +28,7 @@ class Appointment extends Model
         'appointment_uuid',
         'staff_uuid',
         'patient_uuid',
+        'consent_uuid',
         'patient_name',
         'patient_ic_no',
         'appointment_datetime',
@@ -45,6 +47,11 @@ class Appointment extends Model
     public function staff()
     {
         return $this->belongsTo(Staff::class, 'staff_uuid', 'staff_uuid');
+    }
+
+    public function consent()
+    {
+        return $this->hasOne(ConsentForm::class, 'consent_uuid', 'consent_uuid');
     }
 
     public function treatment()

@@ -28,6 +28,7 @@ class AppointmentRequest extends FormRequest
         return [
             'staff_uuid'            => ['required', 'string'],
             'patient_uuid'          => ['required', 'string'],
+            'consent_uuid'          => ['nullable', 'string'],
             'patient_name'          => ['required', 'string', 'max:90'],
             'patient_ic_no'         => ['required', 'string', 'max:90'],
             'appointment_datetime'  => ['required', 'date_format:Y-m-d H:i:s'],
