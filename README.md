@@ -215,6 +215,11 @@ Add below
 127.0.0.1 testing.localhost
 
 5. php artisan make:controller Api/Central/TenantController
+6. php artisan tenants:migrate (to migrate tenant db)
+
+## 016 - Install Audit Activity Log
+1. composer require owen-it/laravel-auditing
+2. php artisan vendor:publish --provider "OwenIt\Auditing\AuditingServiceProvider" --tag="config"                                                     
 
 ## API Flow
 Controller → Service → Repository → DB

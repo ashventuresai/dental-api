@@ -11,9 +11,12 @@ use App\Models\Patient;
 use App\Models\Staff;
 use App\Models\TreatmentAttachment;
 use App\Enums\TreatmentStatus;
+use OwenIt\Auditing\Contracts\Auditable;
+use OwenIt\Auditing\Auditable as AuditableTrait;
 
-class Treatment extends Model
+class Treatment extends Model implements Auditable
 {
+    use AuditableTrait;
     use HasFactory;
 
     protected $table = 'tbltreatment';

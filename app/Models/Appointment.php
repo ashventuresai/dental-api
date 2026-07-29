@@ -10,9 +10,13 @@ use App\Models\Patient;
 use App\Models\Staff;
 use App\Models\Treatment;
 use App\Enums\AppointmentStatus;
+use OwenIt\Auditing\Contracts\Auditable;
+use OwenIt\Auditing\Auditable as AuditableTrait;
 
-class Appointment extends Model
+
+class Appointment extends Model implements Auditable
 {
+    use AuditableTrait;
     use HasFactory;
 
     protected $table = 'tblappointments';
