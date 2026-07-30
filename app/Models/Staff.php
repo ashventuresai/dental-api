@@ -4,9 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
+use OwenIt\Auditing\Contracts\Auditable;
+use OwenIt\Auditing\Auditable as AuditableTrait;
 
-class Staff extends Model
+class Staff extends Model implements Auditable
 {
+    use AuditableTrait;
+    
     protected $table = 'tblstaff';
 
     protected $fillable = [

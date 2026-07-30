@@ -3,11 +3,15 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use OwenIt\Auditing\Contracts\Auditable;
+use OwenIt\Auditing\Auditable as AuditableTrait;
 
 use App\Models\Invoice;
 
-class Payment extends Model
+class Payment extends Model implements Auditable
 {
+    use AuditableTrait;
+    
     protected $table = 'tblpayments';
     protected $primaryKey = 'payment_uuid';
     protected $keyType = 'string';

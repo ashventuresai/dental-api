@@ -8,9 +8,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Enums\ProductType;
 use App\Models\ProductCategory;
 use App\Models\ProductUnit;
+use OwenIt\Auditing\Contracts\Auditable;
+use OwenIt\Auditing\Auditable as AuditableTrait;
 
-class Product extends Model
+class Product extends Model implements Auditable
 {
+    use AuditableTrait;
     use SoftDeletes;
 
     protected $table = 'tblproducts';

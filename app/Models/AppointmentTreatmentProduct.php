@@ -3,10 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use OwenIt\Auditing\Contracts\Auditable;
+use OwenIt\Auditing\Auditable as AuditableTrait;
 
 use App\Models\Product;
 
-class AppointmentTreatmentProduct extends Model
+class AppointmentTreatmentProduct extends Model implements Auditable
 {
     protected $table = 'tblappointment_treatment_products';
 

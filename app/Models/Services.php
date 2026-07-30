@@ -6,9 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Models\Appointment;
+use OwenIt\Auditing\Contracts\Auditable;
+use OwenIt\Auditing\Auditable as AuditableTrait;
 
-class Services extends Model
+class Services extends Model implements Auditable
 {
+    use AuditableTrait;
     use HasFactory;
 
     protected $table = 'tblservices';

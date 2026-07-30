@@ -3,13 +3,17 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use OwenIt\Auditing\Contracts\Auditable;
+use OwenIt\Auditing\Auditable as AuditableTrait;
 
 use App\Models\Product;
 use App\Enums\StockMovementType;
 use App\Enums\StockReferenceType;
 
-class StockMovement extends Model
+class StockMovement extends Model implements Auditable
 {
+    use AuditableTrait;
+    
     protected $table = 'tblstock_movements';
 
     protected $fillable = [

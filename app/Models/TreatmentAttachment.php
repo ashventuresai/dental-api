@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use OwenIt\Auditing\Contracts\Auditable;
+use OwenIt\Auditing\Auditable as AuditableTrait;
 
 /**
  * TreatmentAttachment Model
@@ -18,8 +20,9 @@ use Illuminate\Support\Str;
  * The appended `url` attribute generates the public-facing URL at runtime,
  * always relative to the active tenant's storage root.
  */
-class TreatmentAttachment extends Model
+class TreatmentAttachment extends Model implements Auditable
 {
+    use AuditableTrait;
     use HasFactory;
 
     protected $table      = 'tbltreatment_attachments';
