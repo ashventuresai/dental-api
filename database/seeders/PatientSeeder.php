@@ -186,7 +186,7 @@ class PatientSeeder extends Seeder
                 'city' => 'Subang',
                 'state' => 'Selangor',
                 'country' => 'Malaysia',
-                'sex' => 'male',
+                'sex' => 'Male',
                 'age' => 25,
                 'date_of_birth' => '1997-04-08',
                 'contact_no' => '0132769987',

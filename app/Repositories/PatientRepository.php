@@ -31,6 +31,54 @@ class PatientRepository implements PatientRepositoryInterface
         return $query->orderByDesc('ID')->paginate($perPage)->withQueryString();
     }
 
+    public function getPatientByNameAndIC(array $filters)
+    {
+        $searchQuery = $filters['q'];
+        $limit = $filters['limit'] ?? 10;
+
+        return Patient::where(function ($query) use ($searchQuery) {
+                $query->where('firstname', 'LIKE', "%{$searchQuery}%")
+                    ->orWhere('middlename', 'LIKE', "%{$searchQuery}%")
+                    ->orWhere('lastname', 'LIKE', "%{$searchQuery}%")
+                    ->orWhere('ic_no', 'LIKE', "%{$searchQuery}%")
+                    ->orWhere('contact_no', 'LIKE', "%{$searchQuery}%");
+            })
+            ->select([
+                'firstname',
+                'middlename',
+                'lastname',
+                'id_type',
+                'ic_no',
+                'passport_no',
+                'addressline1',
+                'addressline2',
+                'postalcode',
+                'city',
+                'state',
+                'country',
+                'sex',
+                'age',
+                'date_of_birth',
+                'contact_no',
+                'emergency_name_1',
+                'emergency_phone_1'
+            ])
+            ->orderByRaw("
+                CASE
+                    WHEN firstname LIKE ? THEN 1
+                    WHEN ic_no LIKE ? THEN 2
+                    WHEN contact_no LIKE ? THEN 3
+                    ELSE 4
+                END
+            ", [
+                "{$searchQuery}%",
+                "{$searchQuery}%",
+                "{$searchQuery}%"
+            ])
+            ->limit($limit)
+            ->get();
+    }
+
     public function findById($id)
     {
         return Patient::findOrFail($id);

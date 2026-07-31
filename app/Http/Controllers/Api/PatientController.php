@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\DTO\Patient\CreatePatientDTO;
 use App\DTO\Patient\UpdatePatientDTO;
 use App\Services\PatientService;
+
 use App\Http\Requests\PatientRequest;
 
 class PatientController extends Controller
@@ -22,6 +23,19 @@ class PatientController extends Controller
     {
         return response()->json(
             $this->service->getAllPatients($request->all())
+        );
+    }
+
+    /**
+     * SPECIAL FUNCTION: Search patients specifically for consent form auto-population
+     * This is optimized for the frontend consent form search functionality
+     */
+    public function searchForConsent(Request $request)
+    {
+        return response()->json(
+            $this->service->getPatient(
+                $request->all()
+            )
         );
     }
 

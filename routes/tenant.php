@@ -42,7 +42,15 @@ Route::prefix('v1')->group(function () {
             | Patients
             |--------------------------------------------------------------------------
             */
-            Route::apiResource('patients', PatientController::class)->parameters(['patients'=>'patient_uuid']);
+            Route::prefix('patients')->controller(PatientController::class)->group(function () {
+                Route::get('/', 'index');
+                Route::get('/search-consent', 'searchForConsent');                
+                Route::post('/', 'store');
+                // Route::get('/{patient_uuid}', 'show');
+                Route::put('/{patient_uuid}', 'update');
+                // Route::patch('/{patient_uuid}', 'update');
+                Route::delete('/{patient_uuid}', 'destroy');
+            });
 
             /*
             |--------------------------------------------------------------------------

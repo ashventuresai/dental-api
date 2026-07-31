@@ -5,6 +5,7 @@ namespace App\Repositories\Interfaces;
 interface PatientRepositoryInterface
 {
     public function getAll(array $filters = []);
+    public function getPatientByNameAndIC(array $filters);    
     public function findById($id);
     public function create(array $data);
     public function update($id, array $data);
